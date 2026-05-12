@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="is">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Leiðbeiningar fyrir merkjalýsingarsniðmát</title>
+  <style>
+    :root{
+      /* HMS litapalletta, 2026 */
+      --hms-blue-900:#11223a;
+      --hms-blue-800:#193556;
+      --hms-blue-700:#234064;
+      --hms-blue-300:#889fb4;
+      --hms-gray-100:#eaeaea;
+      --hms-green-300:#bbb555;
+      --hms-green-700:#667120;
+      --hms-gold-300:#daa852;
+      --hms-gold-700:#ab6604;
+      --hms-coral-300:#db6e59;
+      --hms-red-700:#cd371b;
+
+      --bg:#f7f8f9;
+      --card:#ffffff;
+      --text:#11223a;
+      --muted:#4f6175;
+      --line:#d9e1e7;
+      --accent:#193556;
+      --accent-dark:#11223a;
+      --accent-soft:#eef2f5;
+      --ok:#667120;
+      --ok-soft:#f1f3df;
+      --warn:#ab6604;
+      --warn-soft:#fbf1df;
+      --bad:#cd371b;
+      --bad-soft:#fbe9e5;
+      --code:#f2f4f6;
+    }
+
+    @font-face{
+      font-family:"Setimo";
+      src:url("Web1Yr_Setimo_Rg.woff2") format("woff2"),
+          url("Web1Yr_Setimo_Rg.woff") format("woff");
+      font-weight:400;
+      font-style:normal;
+      font-display:swap;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Setimo", Arial, Helvetica, sans-serif;
+      line-height:1.6;
+      color:var(--text);
+      background:var(--bg);
+    }
+    header{
+      background:linear-gradient(135deg,var(--hms-blue-900),var(--hms-blue-800) 52%,var(--hms-blue-700));
+      color:#fff;
+      padding:48px 24px 42px;
+      border-bottom:8px solid var(--hms-gold-300);
+    }
+    header .wrap{max-width:1180px;margin:0 auto}
+    h1{font-size:clamp(2rem,4vw,3.45rem);line-height:1.08;margin:0 0 16px;font-weight:700;letter-spacing:-.02em}
+    header p{font-size:1.08rem;max-width:920px;margin:0;color:#f4f7fa}
+    .layout{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:310px 1fr;gap:24px;padding:24px}
+    nav{
+      position:sticky;
+      top:16px;
+      align-self:start;
+      background:var(--card);
+      border:1px solid var(--line);
+      border-top:5px solid var(--hms-blue-800);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:0 10px 28px rgba(17,34,58,.08);
+    }
+    nav h2{font-size:1rem;margin:0 0 12px;color:var(--hms-blue-900)}
+    nav a{display:block;color:var(--text);text-decoration:none;padding:8px 10px;border-radius:10px;font-size:.94rem}
+    nav a:hover{background:var(--accent-soft);color:var(--hms-blue-800)}
+    main{min-width:0}
+    section{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:28px;
+      margin-bottom:22px;
+      box-shadow:0 10px 28px rgba(17,34,58,.06);
+    }
+    section:nth-of-type(4n+1){border-top:5px solid var(--hms-blue-800)}
+    section:nth-of-type(4n+2){border-top:5px solid var(--hms-green-300)}
+    section:nth-of-type(4n+3){border-top:5px solid var(--hms-gold-300)}
+    section:nth-of-type(4n+4){border-top:5px solid var(--hms-coral-300)}
+    h2{font-size:1.65rem;margin:0 0 10px;color:var(--hms-blue-900);letter-spacing:-.01em}
+    h3{font-size:1.2rem;margin:26px 0 8px;color:var(--hms-blue-800)}
+    p{margin:10px 0}
+    ul,ol{padding-left:24px}
+    li{margin:6px 0}
+    table{width:100%;border-collapse:collapse;margin:14px 0 22px;font-size:.95rem;background:#fff}
+    th,td{border:1px solid var(--line);padding:10px;vertical-align:top;text-align:left}
+    th{background:var(--hms-blue-900);color:#fff;font-weight:700}
+    tr:nth-child(even) td{background:#fafbfc}
+    .pill{display:inline-block;border-radius:999px;background:var(--hms-blue-300);color:#fff;padding:4px 10px;font-size:.82rem;font-weight:700;margin:0 6px 6px 0}
+    .callout{border-left:5px solid var(--hms-blue-800);background:var(--accent-soft);padding:14px 16px;border-radius:14px;margin:16px 0}
+    .ok{border-left-color:var(--ok);background:var(--ok-soft)}
+    .warn{border-left-color:var(--warn);background:var(--warn-soft)}
+    .bad{border-left-color:var(--bad);background:var(--bad-soft)}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .mini{border:1px solid var(--line);border-radius:16px;padding:16px;background:#fbfcfe;border-top:4px solid var(--hms-blue-300)}
+    code,pre{background:var(--code);border-radius:10px}
+    code{padding:2px 6px}
+    pre{white-space:pre-wrap;padding:14px;overflow:auto;border:1px solid var(--line);border-left:5px solid var(--hms-gold-300)}
+    .checklist label{display:block;padding:8px 10px;margin:6px 0;border:1px solid var(--line);border-radius:12px;background:#fbfcfe}
+    input[type="checkbox"]{accent-color:var(--hms-blue-800)}
+    footer{max-width:1180px;margin:0 auto 40px;padding:0 24px;color:var(--muted)}
+    @media(max-width:900px){.layout{grid-template-columns:1fr}nav{position:static}.grid{grid-template-columns:1fr}}
+    @media print{
+      nav{display:none}
+      .layout{display:block;padding:0}
+      section{box-shadow:none;break-inside:avoid}
+      header{background:#fff;color:#000;border-bottom:2px solid #000}
+      header p{color:#333}
+      body{background:#fff}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Leiðbeiningar fyrir merkjalýsingarsniðmát</h1>
+      <p>Vinnuhandbók fyrir gerð merkjalýsingar í merkjalýsingarkerfi. Handbókin fylgir liðum sniðmátsins og tekur mið af lögum nr. 6/2001 um skráningu, merki og mat fasteigna, reglugerð nr. 160/2024 um merki fasteigna og leiðbeiningum HMS um skráningu fasteigna.</p>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav aria-label="Efnisyfirlit">
+      <h2>Efnisyfirlit</h2>
+      <a href="#hvad-er">1. Hvað er merkjalýsing?</a>
+      <a href="#lagagrunnur">2. Lagagrunnur og kröfur</a>
+      <a href="#hlutverk">3. Hlutverk og ábyrgð</a>
+      <a href="#vinnuferli">4. Vinnuferli frá upphafi til skila</a>
+      <a href="#kerfi">5. Almenn notkun kerfisins</a>
+      <a href="#lidur1">6. Liður 1: Breytingar eigna</a>
+      <a href="#lidur2">7. Liður 2: Upplýsingar um mál</a>
+      <a href="#lidur3">8. Liður 3: Fasteignir fyrir breytingu</a>
+      <a href="#lidur4">9. Liður 4: Fasteignir eftir breytingu</a>
+      <a href="#lidur5">10. Liður 5: Skipulag</a>
+      <a href="#lidur6">11. Liður 6: Kvaðir og réttindi</a>
+      <a href="#lidur7">12. Liður 7: Nýjar mælingar</a>
+      <a href="#lidur8">13. Liður 8: Eldri mælingar</a>
+      <a href="#lidur9">14. Liður 9: Gagnaöflun</a>
+      <a href="#lidur10">15. Liður 10: Aðliggjandi eignir</a>
+      <a href="#lidur11">16. Liður 11: Rökstuðningur undirskrifta</a>
+      <a href="#lidur12">17. Liður 12: Hnitsettur uppdráttur</a>
+      <a href="#lidur13">18. Liður 13: Undirskriftir</a>
+      <a href="#malfar">19. Góð íslenska</a>
+      <a href="#lokagatlisti">20. Lokaúttekt</a>
+    </nav>
+
+    <main>
+      <section id="hvad-er">
+        <h2>1. Hvað er merkjalýsing?</h2>
+        <p>Merkjalýsing er formlegt skjal sem lýsir landfræðilegri afmörkun fasteignar. Í henni skulu einnig koma fram þær upplýsingar sem nauðsynlegar eru vegna skráningar fasteignar, svo sem merki, hvaða fasteignir eiga merki saman, stærðir, skikar, eignarhlutföll í séreignar- og sameignarskikum og réttindi eða kvaðir sem tengjast fasteigninni.</p>
+        <div class="callout">
+          <strong>Meginmarkmið:</strong> Merki skulu sett fram þannig að þau séu glögg, rekjanleg, mælanleg og skiljanleg í texta, hnitaskrá og á hnitsettum uppdrætti.
+        </div>
+        <h3>Hvenær þarf merkjalýsingu?</h3>
+        <ul>
+          <li>Þegar ný fasteign eða lóð er stofnuð.</li>
+          <li>Þegar landi er skipt í fleiri fasteignir.</li>
+          <li>Þegar fasteignir eru sameinaðar.</li>
+          <li>Þegar merkjum fasteigna er breytt.</li>
+          <li>Þegar eldri skráning er leiðrétt eða gerð skýrari.</li>
+          <li>Þegar réttindi, kvaðir eða önnur skráningaratriði þurfa að koma fram með afmörkun.</li>
+        </ul>
+      </section>
+
+      <section id="lagagrunnur">
+        <h2>2. Lagagrunnur og kröfur</h2>
+        <p>Við gerð merkjalýsingar þarf að huga sérstaklega að lögum nr. 6/2001 um skráningu, merki og mat fasteigna og reglugerð nr. 160/2024 um merki fasteigna. Sniðmátið er vinnugagn til að tryggja að upplýsingar sem skipta máli við lögformlega skráningu fasteigna komi fram með skipulegum og rekjanlegum hætti.</p>
+        <h3>Lög nr. 6/2001, atriði sem skipta sérstaklega máli</h3>
+        <table>
+          <thead><tr><th>Efni</th><th>Hvað þýðir það í vinnslu merkjalýsingar?</th></tr></thead>
+          <tbody>
+            <tr><td>Merki fasteigna skulu vera glögg</td><td>Merki þurfa að vera nægilega skýr til að hægt sé að staðsetja þau, skrá þau og endurheimta síðar. Texti, hnit og uppdráttur þurfa að styðja hvert annað.</td></tr>
+            <tr><td>Hnitsetning og mæliaðferðir</td><td>Vinna skal með viðurkenndum mæliaðferðum og viðeigandi hnitakerfi. Í reitum um hnit þarf að skrá punktnúmer, hnit, mæliaðferð, nákvæmni og aðrar upplýsingar sem sniðmátið krefst.</td></tr>
+            <tr><td>Vikmörk mælinga</td><td>Meta þarf hvort nákvæmni mælinga sé fullnægjandi miðað við aðstæður, skipulagsstöðu og eðli merkja. Í skipulögðu þéttbýli eru almennt gerðar strangari kröfur til nákvæmni en utan þéttbýlis.</td></tr>
+            <tr><td>Stærð fasteignar</td><td>Stærðir fasteigna og skika skulu reiknaðar út frá þeirri afmörkun sem lögð er til grundvallar. Ef sameign eða óskipt land kemur við sögu þarf að skýra hvernig stærð og eignarhlutföll eru sett fram.</td></tr>
+            <tr><td>Ágreiningur um merki</td><td>Ef ágreiningur er um merki þarf að greina hann sérstaklega. Merkjalýsing á ekki að fela óleystan ágreining, heldur byggjast á fullnægjandi heimildum, samþykki, sátt, úrlausn eða öðrum gögnum eftir atvikum.</td></tr>
+            <tr><td>Skráning heimilda</td><td>Merkjalýsing, lýsing á breytingum, sátt, dómar og önnur gögn um merki geta haft þýðingu fyrir skráningu í fasteignaskrá og birtingu upplýsinga í landeignaskrá.</td></tr>
+          </tbody>
+        </table>
+        <h3>Reglugerð nr. 160/2024, atriði sem þarf að huga að</h3>
+        <ul>
+          <li>Reglugerðin fjallar um merki fasteigna, merkjalýsingar og gerð þeirra.</li>
+          <li>Hún fjallar um kröfur til merkjalýsenda, námskeið, leyfisveitingar og ábyrgð.</li>
+          <li>Markmið hennar er að tryggja að merki séu hnitsett, glögg og skýr.</li>
+          <li>Hún setur ramma um efni, form og frágang merkjalýsinga, uppdrátta, hnita og stærðarútreikninga.</li>
+          <li>Hún skýrir hvaða upplýsingar þurfa að koma fram í einstökum liðum merkjalýsingarsniðmátsins.</li>
+        </ul>
+        <div class="callout warn">
+          <strong>Mikilvægt:</strong> Merkjalýsing leysir ekki af hólmi þinglýsingu. Fasteignaskrá er grundvöllur þinglýsingarbókar, en þinglýst réttindi, eignarhald og kvaðir eru skráð í þinglýsingarbók. Ef breyta þarf þinglýstum réttindum, eignarhaldi eða kvöðum þarf eigandi eða viðkomandi rétthafi að skila viðeigandi skjölum til sýslumanns, eftir því sem við á.
+        </div>
+      </section>
+
+      <section id="hlutverk">
+        <h2>3. Hlutverk og ábyrgð</h2>
+        <div class="grid">
+          <div class="mini">
+            <h3>Merkjalýsandi</h3>
+            <p>Merkjalýsandi aflar gagna, mælir eða staðfestir merki, gerir merkjalýsingu og ber ábyrgð á því að upplýsingar séu réttar, skýrar og í samræmi við gögn máls, lög og reglugerðir.</p>
+          </div>
+          <div class="mini">
+            <h3>Eigandi eða umsækjandi</h3>
+            <p>Eigandi eða umsækjandi leggur fram heimildir, samþykki og upplýsingar um eignarhald, réttindi, kvaðir, fyrri afmörkun og tilgang breytingar.</p>
+          </div>
+          <div class="mini">
+            <h3>Sveitarfélag</h3>
+            <p>Sveitarfélag fer yfir samræmi við skipulag, samþykkir eða staðfestir málið eftir því sem við á og tryggir að breytingin samræmist stjórnsýslu sveitarfélagsins.</p>
+          </div>
+          <div class="mini">
+            <h3>HMS og fasteignaskrá</h3>
+            <p>HMS tekur við gögnum til skráningar í fasteignaskrá og landeignaskrá eftir því sem við á. Skráning byggist á lögformlegum og fullnægjandi gögnum.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="vinnuferli">
+        <h2>4. Vinnuferli frá upphafi til skila</h2>
+        <ol>
+          <li><strong>Skilgreina verkefnið.</strong> Greina hvort verið sé að stofna fasteign, skipta landi, sameina fasteignir, leiðrétta eldri skráningu eða breyta merkjum.</li>
+          <li><strong>Sækja grunnupplýsingar.</strong> Afla landnúmers, fasteignanúmers, staðfangs, skráðra stærða, eigendaupplýsinga, skipulagsgagna og eldri skjala.</li>
+          <li><strong>Greina heimildir.</strong> Fara yfir þinglýst skjöl, lóðarleigusamninga, eldri mæliblöð, uppdrætti, skipulag og fyrri skráningu.</li>
+          <li><strong>Mæla eða staðfesta merki.</strong> Hnitsetja viðeigandi punkta og bera niðurstöður saman við eldri gögn.</li>
+          <li><strong>Reikna stærðir.</strong> Reikna stærð fasteigna og skika eftir breytingu út frá þeirri afmörkun sem lögð er til grundvallar.</li>
+          <li><strong>Fylla út sniðmátið.</strong> Gæta samræmis milli texta, hnita, uppdráttar og fylgiskjala.</li>
+          <li><strong>Fá samþykki.</strong> Tryggja undirritun eigenda, sveitarfélags og annarra aðila eftir eðli máls.</li>
+          <li><strong>Yfirfara og skila.</strong> Gera lokaúttekt áður en skjalið fer í formlega meðferð.</li>
+        </ol>
+      </section>
+
+      <section id="kerfi">
+        <h2>5. Almenn notkun kerfisins</h2>
+        <p>Kerfið er notað til að fylla út merkjalýsingu, varðveita vinnugögn tímabundið í vafra og búa til lokaútgáfu skjals.</p>
+        <table>
+          <thead><tr><th>Aðgerð</th><th>Notkun</th><th>Varúð</th></tr></thead>
+          <tbody>
+            <tr><td>Sjálfvirk vistun</td><td>Gögn vistast í vafranum á meðan unnið er.</td><td>Sjálfvirk vistun er ekki varanleg varðveisla eða formleg skil.</td></tr>
+            <tr><td>Vista útgáfu</td><td>Notað til að varðveita nafngreint afrit.</td><td>Nota reglulega, sérstaklega áður en stórar breytingar eru gerðar.</td></tr>
+            <tr><td>Forskoða PDF</td><td>Sýnir hvernig merkjalýsingin kemur út á PDF-formi.</td><td>Yfirfara þarf PDF sérstaklega áður en lokaskjal er vistað.</td></tr>
+            <tr><td>Vista PDF</td><td>Hleður niður PDF-skjali.</td><td>Tryggja þarf að PDF sé byggt á lokagögnum.</td></tr>
+            <tr><td>XML Export</td><td>Flytur út öll gögn málsins.</td><td>Gagnlegt til afritunar, flutnings eða varðveislu vinnugagna.</td></tr>
+            <tr><td>XML Import</td><td>Les áður útflutt gögn aftur inn.</td><td>Yfirfara skal gögn eftir innlestur.</td></tr>
+            <tr><td>Hreinsa</td><td>Eyðir gögnum úr vafranum.</td><td>Nota aðeins ef öruggt er að gögn megi eyðast eða afrit hafi verið vistað.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="lidur1">
+        <h2>6. Liður 1: Nánari lýsing á breytingum eigna</h2>
+        <p><span class="pill">Reglugerð nr. 160/2024, 8. gr. b. og c. liður</span></p>
+        <p>Í þessum lið á að lýsa nákvæmlega hvers eðlis breytingin er. Textinn á að gefa skýra mynd af málinu, forsögu þess og tengingu við heildarferlið.</p>
+        <h3>Skrá skal</h3>
+        <ul>
+          <li>Tegund máls, til dæmis uppskiptingu, sameiningu, tilfærslu, leiðréttingu, frumskráningu eða samsetta aðgerð.</li>
+          <li>Hvaða fasteign eða fasteignir eru upprunaland eða upprunaeignir.</li>
+          <li>Hvort merkjalýsingin gildir um alla fasteignina eða aðeins hluta hennar.</li>
+          <li>Hvaða merki breytast og hvaða merki haldast óbreytt.</li>
+          <li>Röð aðgerða ef um samsetta aðgerð er að ræða.</li>
+          <li>Hvaða gögn eða ákvarðanir liggja að baki breytingunni.</li>
+        </ul>
+        <h3>Dæmi um orðalag</h3>
+        <pre>Með merkjalýsingu þessari er gerð grein fyrir uppskiptingu fasteignar Fxxxxxxx, landnúmer Lxxxxxx. Úr upprunaeigninni verða til tvær fasteignir, annars vegar lóð A og hins vegar lóð B. Ytri merki upprunaeignar haldast óbreytt, en ný merki milli lóðanna liggja frá punkti M4 að punkti M7, eins og sýnt er á hnitsettum uppdrætti.</pre>
+        <div class="callout bad"><strong>Forðast skal:</strong> Óljósa lýsingu á borð við „landinu er breytt samkvæmt meðfylgjandi gögnum“. Liðurinn þarf sjálfur að segja hvað er að breytast.</div>
+      </section>
+
+      <section id="lidur2">
+        <h2>7. Liður 2: Upplýsingar um mál</h2>
+        <p><span class="pill">Reglugerð nr. 160/2024, 8. gr. a., n., o. og p. liður</span></p>
+        <p>Hér eru skráðar grunnupplýsingar um málið og merkjalýsandann. Þessi liður tryggir rekjanleika skjalsins.</p>
+        <table>
+          <thead><tr><th>Reitur</th><th>Leiðbeining</th><th>Dæmi</th></tr></thead>
+          <tbody>
+            <tr><td>Málsnúmer</td><td>Skrá einstakt tilvísunarnúmer máls.</td><td>M000111</td></tr>
+            <tr><td>Dagsetning</td><td>Skrá dagsetningu merkjalýsingarinnar eða þá útgáfu sem er til undirritunar.</td><td>12.05.2026</td></tr>
+            <tr><td>Tegund máls</td><td>Velja viðeigandi tegund úr fellivalmynd. Velja samsetta aðgerð ef fleiri en ein aðgerð fer fram.</td><td>Uppskipting, sameining, tilfærsla</td></tr>
+            <tr><td>Heiti verks</td><td>Nota lýsandi heiti sem auðvelt er að þekkja síðar.</td><td>Norðurtún 12, uppskipting L123456</td></tr>
+            <tr><td>Nafn merkjalýsanda</td><td>Skrá fullt nafn leyfishafa.</td><td>Fullt nafn</td></tr>
+            <tr><td>Kennitala merkjalýsanda</td><td>Skrá kennitölu leyfishafa, ef reitur krefst þess.</td><td>000000-0000</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="lidur3">
+        <h2>8. Liður 3: Fasteignir fyrir breytingu, upprunaeignir</h2>
+        <p><span class="pill">Reglugerð nr. 160/2024, 8. gr. a., e., f., j. og l. liður</span></p>
+        <p>Í þessum lið skal skrá þær fasteignir sem breytast. Nota skal eina færslu fyrir hverja fasteign.</p>
+        <h3>Skrá skal fyrir hverja upprunaeign</h3>
+        <ul>
+          <li>Sveitarfélag.</li>
+          <li>Landeignanúmer, með L og tölum.</li>
+          <li>Fasteignanúmer, með F og tölum.</li>
+          <li>Hvort eignin sé fullnaðarskráð.</li>
+          <li>Staðfang.</li>
+          <li>Skráða stærð í fermetrum.</li>
+          <li>Mælda stærð í fermetrum, ef við á.</li>
+          <li>Þinglýsta landeigendur með beinan eignarrétt.</li>
+          <li>Nafn, kennitölu og eignarhlutfall þinglýstra landeigenda.</li>
+          <li>Skika, númer þeirra, eignarhlutfall og stærð hvers skika.</li>
+        </ul>
+        <div class="callout warn"><strong>Mikilvægt:</strong> Í þessum lið skal skrá þinglýsta landeigendur með beinan eignarrétt. Óbeinn eignarréttur, svo sem lóðaleiga eða annar afnotaréttur, kemur ekki í stað þinglýsts landeiganda í þessum reit.</div>
+      </section>
+
+      <section id="lidur4">
+        <h2>9. Liður 4: Fasteignir eftir breytingu</h2>
+        <p><span class="pill">Reglugerð nr. 160/2024, 8. gr. a., e., f., j. og l. liður</span></p>
+        <p>Hér skal skrá stöðu fasteigna eftir breytingu. Nota má aðgerðina <strong>Afrita úr lið 3</strong> og breyta síðan þeim atriðum sem eiga við.</p>
+        <h3>Skrá skal</h3>
+        <ul>
+          <li>Fasteignanúmer, ef það liggur fyrir eða á við.</li>
+          <li>Landeignanúmer, ef það liggur fyrir eða á við.</li>
+          <li>Staðfang eða heiti eignar eftir breytingu.</li>
+          <li>Stærð eftir breytingu.</li>
+          <li>Skika og stærð þeirra eftir breytingu.</li>
+          <li>Hvaða merki mynda endanlega afmörkun fasteignar.</li>
+        </ul>
+        <div class="callout bad"><strong>Áríðandi aðgreining:</strong> Eigendaupplýsingar eru ekki skráðar hér sem ný skráning eignarhalds. Eignarhald breytist ekki með þessum lið einum og sér. Ef þinglýst eignarhald á að breytast þarf viðeigandi þinglýsingarskjöl, eftir því sem við á.</div>
+        <pre>Eftir breytingu verður fasteign Fxxxxxxx, landnúmer Lxxxxxx, 1.250 m² að stærð. Fasteignin afmarkast af punktum M1 til M6, eins og sýnt er í hnitaskrá og á hnitsettum uppdrætti. Skiki A er 1.250 m² og telst séreign fasteignarinnar.</pre>
+      </section>
+
+      <section id="lidur5">
+        <h2>10. Liður 5: Skipulag</h2>
+        <p><span class="pill">Reglugerð nr. 160/2024, 8. gr. d. liður</span></p>
+        <p>Í þessum lið skal gera grein fyrir skipulagslegum grundvelli málsins og hvernig merkjalýsingin samræmist skipulagi.</p>
+        <ul>
+          <li>Tilvísun í gildandi aðalskipulag, með heiti og ártali.</li>
+          <li>Tilvísun í deiliskipulag, ef það á við.</li>
+          <li>Hvernig merki samræmast landnotkun, lóðarmörkum, byggingarreitum og öðrum skipulagsákvæðum.</li>
+          <li>Ef skipulag liggur ekki fyrir skal taka það fram og rökstyðja.</li>
+        </ul>
+      </section>
+
+      <section id="lidur6">
+        <h2>11. Liður 6: Kvaðir og réttindi</h2>
+        <p><span class="pill">Reglugerð nr. 160/2024, 8. gr. h. og i. liður</span></p>
+        <p>Hér skal skrá réttindi sem fylgja fasteigninni, takmarkanir á ráðstöfunarrétti og kvaðir sem hvíla á henni.</p>
+        <ul>
+          <li>Vegnarétt, akstursrétt, göngurétt eða yfirfararrétt.</li>
+          <li>Rétt til vatnstöku eða annarra nytja.</li>
+          <li>Lagnakvaðir vegna vatns, fráveitu, rafmagns, hitaveitu eða fjarskipta.</li>
+          <li>Þjónustuleiðir, aðkomuleiðir eða sameiginleg afnotasvæði.</li>
+          <li>Forkaupsrétt, samþykkisákvæði eða aðrar takmarkanir á ráðstöfunarrétti.</li>
+        </ul>
+        <div class="callout ok"><strong>Ef engar kvaðir eru til staðar:</strong> Skrá skal það skýrt, til dæmis: „Engar þekktar kvaðir eða sérstök réttindi eru skráð í tengslum við þessa merkjalýsingu.“</div>
+        <pre>Á fasteign Fxxxxxxx hvílir kvöð um 4,0 m breiða aðkomuleið fyrir fasteign Fyyyyyyy. Kvöðin er auðkennd sem K1 á hnitsettum uppdrætti og nær frá punkti K1-1 að punkti K1-2.</pre>
+      </section>
+
+      <section id="lidur7">
+        <h2>12. Liður 7: Hnitaskrá, nýjar mælingar</h2>
+        <p><span class="pill">Reglugerð nr. 160/2024, 11. gr.</span></p>
+        <p>Í þessum lið skal skrá nýjar mælingar sem lagðar eru til grundvallar merkjalýsingunni.</p>
+        <table>
+          <thead><tr><th>Dálkur</th><th>Leiðbeining</th></tr></thead>
+          <tbody>
+            <tr><td>X, austur</td><td>Skrá austurhnit í völdu hnitakerfi.</td></tr>
+            <tr><td>Y, norður</td><td>Skrá norðurhnit í völdu hnitakerfi.</td></tr>
+            <tr><td>Nákvæmni hnits</td><td>Skrá mat á nákvæmni eða viðeigandi flokkun samkvæmt mælingu.</td></tr>
+            <tr><td>Staðsetningarflokkun</td><td>Skrá flokkun ef kerfið krefst þess.</td></tr>
+            <tr><td>Lýsing hnits</td><td>Skýra hvað punkturinn táknar, til dæmis horn lóðar eða endapunkt kvöðarsvæðis.</td></tr>
+            <tr><td>Ákveðið frávik</td><td>Skrá frávik ef það á við og rökstyðja í nánari lýsingu.</td></tr>
+            <tr><td>Mæliaðferð</td><td>Tilgreina mæliaðferð, til dæmis GNSS-mælingu eða mælingu með alstöð.</td></tr>
+            <tr><td>Hnitakerfi</td><td>Tilgreina hnitakerfi, til dæmis ISN93, ef það á við.</td></tr>
+            <tr><td>Dagsetning mælingar</td><td>Skrá dagsetningu vettvangsmælingar eða úrvinnslu.</td></tr>
+            <tr><td>Fastmerki</td><td>Skrá fastmerki eða viðmið sem mæling byggist á, ef það á við.</td></tr>
+          </tbody>
+        </table>
+        <h3>CSV-innflutningur</h3>
+        <ul>
+          <li>Hægt er að hlaða inn hnitum úr CSV-skrá.</li>
+          <li>Nota skal sýniseintak kerfisins til að fá rétt dálkasnið.</li>
+          <li>Fyrirsagnarlína verður að vera í fyrstu línu skrárinnar.</li>
+          <li>Yfirfara skal gögn eftir innflutning, sérstaklega aukastafi, dálka og punktnúmer.</li>
+        </ul>
+      </section>
+
+      <section id="lidur8">
+        <h2>13. Liður 8: Hnitaskrá, eldri mælingar</h2>
+        <p><span class="pill">Reglugerð nr. 160/2024, 11. gr.</span></p>
+        <p>Í þessum lið skal skrá eldri mælingar sem hafa verið hafðar til hliðsjónar. Það á líka við þegar eldri mælingar eru ekki lagðar beint til grundvallar endanlegri afmörkun.</p>
+        <ul>
+          <li>Auðkenni eldra skjals, til dæmis númer mæliblaðs eða uppdráttar.</li>
+          <li>Heiti eða lýsingu upprunaheimildar.</li>
+          <li>Hnit eða punktaupplýsingar, ef þær liggja fyrir.</li>
+          <li>Dagsetningu eldri mælingar eða skjals, ef hún er þekkt.</li>
+          <li>Hvernig eldri gögn voru notuð eða hvers vegna þau voru ekki lögð til grundvallar.</li>
+        </ul>
+      </section>
+
+      <section id="lidur9">
+        <h2>14. Liður 9: Gagnaöflun</h2>
+        <p><span class="pill">Reglugerð nr. 160/2024, 10. gr.</span></p>
+        <p>Hér skal gera grein fyrir þeim gögnum sem aflað var og hvernig þau voru metin.</p>
+        <ul>
+          <li>Þinglýstar landamerkjalýsingar.</li>
+          <li>Lóðablöð og mæliblöð.</li>
+          <li>Kaupsamningar, afsöl, lóðarleigusamningar eða eignaskiptayfirlýsingar.</li>
+          <li>Eldri uppdrættir og skipulagsuppdrættir.</li>
+          <li>Deiliskipulag og aðalskipulag.</li>
+          <li>Vettvangsskoðun.</li>
+          <li>Viðtöl eða samskipti við aðila máls, ef þau hafa þýðingu.</li>
+        </ul>
+        <div class="callout warn"><strong>Ef gögn stangast á:</strong> Taka þarf skýrt fram innbyrðis vægi heimilda og rökstyðja hvaða gögn eru lögð til grundvallar.</div>
+        <pre>Við gagnaöflun komu fram þrjár heimildir: þinglýst landamerkjalýsing frá árinu 1978, mæliblað frá árinu 1996 og ný vettvangsmæling dags. dd.mm.áááá. Mæliblaðið og ný mæling eru samhljóða um legu austurmerkja, en landamerkjalýsingin er almennari og án hnita. Endanleg afmörkun byggist því á mæliblaðinu og nýrri hnitsetningu.</pre>
+      </section>
+
+      <section id="lidur10">
+        <h2>15. Liður 10: Aðliggjandi eignir</h2>
+        <p><span class="pill">Reglugerð nr. 160/2024, 8. gr. g. liður og 7. gr.</span></p>
+        <p>Hér skal skrá fasteignir sem liggja að þeim merkjum sem merkjalýsingin fjallar um.</p>
+        <ul>
+          <li>Sveitarfélag.</li>
+          <li>Landnúmer.</li>
+          <li>Fasteignanúmer.</li>
+          <li>Staðfang eða heiti.</li>
+          <li>Þinglýsta landeigendur, með nafni og kennitölu.</li>
+          <li>Hvort eigandi þarf að skrifa undir.</li>
+        </ul>
+        <div class="callout warn"><strong>Undirritun aðliggjandi eigenda:</strong> Eigendur aðliggjandi eigna þurfa að skrifa undir ef merkjalýsingin varðar sérstaklega merki milli eignanna. Ef þeir þurfa ekki að skrifa undir skal rökstyðja það í lið 11.</div>
+      </section>
+
+      <section id="lidur11">
+        <h2>16. Liður 11: Rökstuðningur vegna undirskrifta</h2>
+        <p><span class="pill">Reglugerð nr. 160/2024, 7. gr.</span></p>
+        <p>Þessi liður skýrir hvers vegna tilteknir eigendur þurfa eða þurfa ekki að undirrita merkjalýsinguna.</p>
+        <ul>
+          <li>Hvaða merki liggja að hvaða eignum.</li>
+          <li>Hvaða eigendur skrifa undir og hvers vegna.</li>
+          <li>Rökstuðning ef eigendur aðliggjandi eigna eru undanþegnir undirritun.</li>
+          <li>Tilvísun í laga- eða reglugerðarákvæði ef hún á við.</li>
+        </ul>
+        <pre>Eigandi fasteignar Fyyyyyyy undirritar merkjalýsinguna þar sem merki frá punkti M1 til punkts M2 liggja að fasteign hans og afmörkun þeirra er hluti af þessari merkjalýsingu.</pre>
+        <pre>Eigandi fasteignar Fzzzzzzz er ekki látinn undirrita merkjalýsinguna þar sem merki frá punkti M3 til punkts M4 eru óbreytt frá áður samþykktri og hnitsettri afmörkun. Merkjalýsingin felur ekki í sér breytingu á merkjum gagnvart þeirri fasteign.</pre>
+      </section>
+
+      <section id="lidur12">
+        <h2>17. Liður 12: Hnitsettur uppdráttur</h2>
+        <p><span class="pill">Reglugerð nr. 160/2024, 8. gr. k. liður</span></p>
+        <p>Uppdrátturinn þarf að vera hnitsettur og sýna merki skýrt. Hægt er að hlaða upp mörgum skjölum ef þörf er á.</p>
+        <h3>Studd skráarsnið</h3>
+        <ul>
+          <li>PDF-skjöl.</li>
+          <li>Myndskrár, svo sem JPG, PNG og TIFF.</li>
+          <li>Önnur snið ef kerfið heimilar þau.</li>
+        </ul>
+        <h3>Uppdráttur skal sýna</h3>
+        <ul>
+          <li>Öll merki sem merkjalýsingin fjallar um.</li>
+          <li>Punktnúmer sem samsvara hnitaskrá.</li>
+          <li>Fasteignir fyrir og eftir breytingu, eftir því sem við á.</li>
+          <li>Skika, ef fasteign er í fleiri en einum skika.</li>
+          <li>Kvaðir og réttindi ef þau hafa landfræðilega afmörkun.</li>
+          <li>Aðliggjandi eignir.</li>
+          <li>Norðurör, mælikvarða, heiti verks, dagsetningu og auðkenni uppdráttar.</li>
+        </ul>
+      </section>
+
+      <section id="lidur13">
+        <h2>18. Liður 13: Undirskriftir og dagsetningar</h2>
+        <p><span class="pill">Reglugerð nr. 160/2024, 7. gr.</span></p>
+        <p>Undirskriftarreitir fylgja sjálfkrafa eigendum sem skráðir eru í lið 3 og lið 10. Ef undirskriftarreitir birtast ekki þarf fyrst að kanna hvort eigendur hafi verið rétt skráðir.</p>
+        <table>
+          <thead><tr><th>Aðili</th><th>Hvað skal skrá?</th><th>Vottar?</th></tr></thead>
+          <tbody>
+            <tr><td>Merkjalýsandi</td><td>Nafn, kennitala og dagsetning.</td><td>Ekki þarf að votta undirskrift merkjalýsanda.</td></tr>
+            <tr><td>Eigendur upprunaeigna úr lið 3</td><td>Undirskrift og dagsetning undirskriftar.</td><td>Tveir vottar fyrir hvern eiganda.</td></tr>
+            <tr><td>Eigendur aðliggjandi eigna úr lið 10</td><td>Undirskrift og dagsetning ef merkt er við að þeir þurfi að undirrita.</td><td>Tveir vottar þegar undirskrift er krafist.</td></tr>
+          </tbody>
+        </table>
+        <h3>Algeng vandamál</h3>
+        <ul>
+          <li>Undirskriftarreitir birtast ekki ef eigendur vantar í lið 3 eða lið 10.</li>
+          <li>Rangir eigendur birtast ef upplýsingar um upprunaeignir eða aðliggjandi eignir eru rangar.</li>
+          <li>Votta vantar ef vottareitir hafa ekki verið fylltir út.</li>
+        </ul>
+      </section>
+
+      <section id="malfar">
+        <h2>19. Góð íslenska og samræmt orðalag</h2>
+        <p>Merkjalýsing þarf að vera skýr stjórnsýslu- og skráningartexti. Nota skal einfalt mál, samræmd hugtök og forðast orðalag sem getur valdið túlkunarvafa.</p>
+        <h3>Nota skal</h3>
+        <ul>
+          <li><strong>merkjalýsing</strong> um skjalið sjálft.</li>
+          <li><strong>merki</strong> um mörk fasteigna samkvæmt lögum og reglugerð.</li>
+          <li><strong>hnitsettur uppdráttur</strong> um uppdrátt sem sýnir hnitsetta afmörkun.</li>
+          <li><strong>þinglýstur landeigandi</strong> þegar átt er við eiganda með beinan þinglýstan eignarrétt.</li>
+          <li><strong>aðliggjandi eign</strong> um fasteign sem á merki að fasteigninni sem fjallað er um.</li>
+        </ul>
+        <h3>Forðast skal</h3>
+        <table>
+          <thead><tr><th>Forðast</th><th>Nota frekar</th><th>Ástæða</th></tr></thead>
+          <tbody>
+            <tr><td>„um það bil“</td><td>Nákvæm hnit, lengd eða rökstudd skýring</td><td>Merkjalýsing þarf að vera glögg og rekjanleg.</td></tr>
+            <tr><td>„gamla girðingin“</td><td>„merki frá punkti M1 til punkts M2“</td><td>Girðing getur færst eða horfið.</td></tr>
+            <tr><td>„eins og áður“</td><td>Tilvísun í tiltekið skjal, dagsetningu eða hnit</td><td>Óljóst hvað „áður“ þýðir.</td></tr>
+            <tr><td>„sjá fylgiskjal“ án skýringar</td><td>Stutt lýsing í texta og tilvísun í fylgiskjal</td><td>Textinn á að vera skiljanlegur sjálfur.</td></tr>
+            <tr><td>Ósamræmd heiti á sömu eign</td><td>Sama heiti í öllum liðum</td><td>Dregur úr hættu á rangri skráningu.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="lokagatlisti">
+        <h2>20. Lokaúttekt fyrir skil</h2>
+        <p>Áður en merkjalýsing er undirrituð eða send áfram skal fara yfir eftirfarandi atriði.</p>
+        <div class="checklist">
+          <label><input type="checkbox"> Liður 1 lýsir skýrt eðli breytingar og röð aðgerða.</label>
+          <label><input type="checkbox"> Málsnúmer, dagsetning, tegund máls og heiti verks eru rétt.</label>
+          <label><input type="checkbox"> Upprunaeignir í lið 3 eru rétt skráðar.</label>
+          <label><input type="checkbox"> Í lið 3 eru aðeins skráðir þinglýstir landeigendur með beinan eignarrétt.</label>
+          <label><input type="checkbox"> Fasteignir eftir breytingu í lið 4 sýna rétta lokastöðu.</label>
+          <label><input type="checkbox"> Eigendaupplýsingar eru ekki ranglega færðar sem nýtt eignarhald í lið 4.</label>
+          <label><input type="checkbox"> Skipulagslegur grundvöllur er skýr í lið 5.</label>
+          <label><input type="checkbox"> Kvaðir og réttindi eru skráð eða skýrt tekið fram að engar slíkar kvaðir séu þekktar.</label>
+          <label><input type="checkbox"> Nýjar mælingar í lið 7 eru fullnægjandi skráðar.</label>
+          <label><input type="checkbox"> Eldri mælingar í lið 8 eru skráðar ef þær voru hafðar til hliðsjónar.</label>
+          <label><input type="checkbox"> Í lið 9 er skýrt hvaða gögn voru notuð og hvaða vægi þau höfðu.</label>
+          <label><input type="checkbox"> Aðliggjandi eignir eru rétt skráðar í lið 10.</label>
+          <label><input type="checkbox"> Rökstuðningur vegna undirskrifta er skýr í lið 11.</label>
+          <label><input type="checkbox"> Hnitsettur uppdráttur í lið 12 samræmist texta og hnitaskrá.</label>
+          <label><input type="checkbox"> Undirskriftir, dagsetningar og vottar eru rétt skráð í lið 13.</label>
+          <label><input type="checkbox"> PDF-forskoðun hefur verið yfirfarin áður en lokaskjal er vistað.</label>
+          <label><input type="checkbox"> XML-afrit eða vistuð útgáfa liggur fyrir ef varðveita þarf vinnugögn.</label>
+        </div>
+        <div class="callout ok"><strong>Lokaviðmið:</strong> Lesandi á að geta séð hvaða fasteignir málið varðar, hvernig staða þeirra var fyrir breytingu, hver breytingin er, hver lokastaðan verður, hvaða gögn styðja niðurstöðuna, hvaða eigendur þurfa að undirrita og hvernig merki eru hnitsett á uppdrætti.</div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <p>Handbókin er vinnugagn. Yfirfara þarf hvert mál miðað við gögn þess, gildandi lög og reglugerðir, fyrirmæli HMS og afgreiðslu viðkomandi stjórnvalds.</p>
+  </footer>
+</body>
+</html>
